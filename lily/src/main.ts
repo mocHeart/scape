@@ -6,10 +6,14 @@ import store from './store'
 import ViewUIPlus from 'view-ui-plus'
 import '@/style/index.scss'
 
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
+
 const app = createApp(App)
 app.use(store)
 app.use(router)
 
 app.use(ViewUIPlus)
+app.use(ElementPlus)
 
 app.mount('#app')

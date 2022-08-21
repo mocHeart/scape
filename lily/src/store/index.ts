@@ -8,6 +8,12 @@ export default createStore({
   getters: {
   },
   mutations: {
+    showMenuHeader (state) {
+      state.isShowMenuHeader = true
+    },
+    hideMenuHeader (state) {
+      state.isShowMenuHeader = false
+    }
   },
   actions: {
   },

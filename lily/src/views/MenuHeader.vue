@@ -1,101 +1,41 @@
 <template>
-  <div class="menubar" :v-show="store.state.isShowMenuHeader">
-    <div class="left">
-      MOC‘s HOME
-    </div>
-    <div class="center">
-      <Menu mode="horizontal" :theme="theme" active-name="1">
-          <MenuItem name="1">
-              <Icon type="ios-home" />
-              首页
-          </MenuItem>
-          <Submenu name="2">
-              <template #title>
-                  <Icon type="ios-stats" />
-                  关于
-              </template>
-              <MenuItem name="2-1">
-                <Icon type="md-person" />
-                我
-              </MenuItem>
-              <MenuItem name="2-2">
-                <Icon type="md-rose" />
-                主题
-              </MenuItem>
-          </Submenu>
-          <Submenu name="3">
-              <template #title>
-                  <Icon type="ios-stats" />
-                  清单
-              </template>
-              <MenuItem name="3-1">
-                <Icon type="md-person" />
-                归档
-              </MenuItem>
-              <MenuItem name="3-2">
-                <Icon type="md-rose" />
-                标签
-              </MenuItem>
-          </Submenu>
-          <MenuItem name="4">
-              <Icon type="ios-home" />
-              微言
-          </MenuItem>
-          <MenuItem name="5">
-              <Icon type="ios-home" />
-              留言
-          </MenuItem>
-          <MenuItem name="6">
-              <Icon type="ios-home" />
-              实验室
-          </MenuItem>
-          <MenuItem name="7">
-              <Icon type="ios-home" />
-              开往
-          </MenuItem>
-      </Menu>
-    </div>
-    <div class="right">
-      <div>
-        <Icon type="ios-search" size="24" />
-      </div>
-      <div>
-        <Icon type="ios-moon-outline" size="24" />
-      </div>
-    </div>
-  </div>
+  <el-menu
+    :default-active="activeIndex"
+    class="el-menu-demo"
+    mode="horizontal"
+    :ellipsis="false"
+    @select="handleSelect"
+  >
+    <el-menu-item index="0">大王饶命</el-menu-item>
+    <div class="flex-grow" />
+    <el-menu-item index="1">首页</el-menu-item>
+    <el-sub-menu index="2">
+      <template #title>管理</template>
+      <el-menu-item index="2-1">写文章</el-menu-item>
+      <el-menu-item index="2-2">开发中</el-menu-item>
+    </el-sub-menu>
+  </el-menu>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { ref } from 'vue'
-import { Menu } from 'view-ui-plus'
-import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 
-const theme = ref('light')
-const store = useStore()
+const router = useRouter()
+
+const activeIndex = ref('1')
+const handleSelect = (key: string, keyPath: string[]) => {
+  console.log(key, keyPath)
+  if (key === '2-1') {
+    console.log('写文章')
+    router.push('/article_edit')
+  }
+}
 
 </script>
 
 <style lang="scss" scoped>
-.menubar {
-  border: 1px solid red;
-  margin: 0 8vw;
-  display: flex;
-  .left {
-    border: 1px solid green;
-    line-height: 60px;
-  }
-  .center {
-    border: 1px solid blue;
-  }
-  .right {
-    display: flex;
-    border: 1px solid pink;
-    div {
-      line-height: 60px;
-      width: 3vw;
-    }
-  }
+.flex-grow {
+  flex-grow: 1;
 }
-
 </style>
